@@ -1,0 +1,37 @@
+<div class="login-form">
+    <div class="card mb-3">
+        <div class="card-body">
+            <h1>Login</h1>
+            <form *ngIf="!isLoggedIn" name="form" #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()" novalidate>
+                <div class="form-group">
+                    <label class="form-label">Username:</label>
+                    <input class="form-control" type="text" name="username" id="username" required #uname="ngModel"
+                        [(ngModel)]="form.username">
+                    <div *ngIf="uname.errors?.['required'] && uname.touched"> Cannot Be Blank </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Password:</label>
+                    <input class="form-control" required type="password" name="password" id="password"
+                        [(ngModel)]="form.password" #password="ngModel">
+                    <div *ngIf="password.errors?.['required'] && password.touched"> Cannot be Blank </div>
+                </div>
+
+                <div class="btn-class">
+                    <button type="submit" class=" btn btn-primary">Login</button>
+                    <button type="button" class="btn btn-secondary" (click)="refreshPage()">Reset</button>
+                </div>
+
+                <div class="form-group">
+                    <div *ngIf="f.submitted && isLoginFailed" class="alert alert-danger" role="alert">
+                        Login Failed: {{errorMessage}}
+                    </div>
+                </div>
+                <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a routerLink="/register"
+                    class="link-danger">Register</a></p>
+            </form>
+        </div>
+    </div>
+
+</div>
+

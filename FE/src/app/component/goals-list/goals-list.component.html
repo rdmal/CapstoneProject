@@ -1,0 +1,45 @@
+<h1 class="display-5 fw-bolder text-center mb-2">Savings Goals</h1>
+
+<div class="goal-table">
+
+    <div>
+        <table class="table table-bordered">
+            <thead>
+                <tr class="table-primary table-dark">
+                    <th> Goal</th>
+                    <th> Price</th>
+                    <th>Savings Each Month</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tr class="table-info table-dark text-black" *ngFor="let goal of goals">
+                <td>{{goal.goals}}</td>
+                <td>{{goal.price|currency}}</td>
+                <td>{{goal.comment|currency}}</td>
+                <td><button class="text-white" (click)="updateGoal(goal.id)">Update</button></td>
+                <td><button class="text-white" (click)="deleteGoal(goal.id)">Delete</button></td>
+            </tr>
+        </table>
+        <button class="btn btn-primary" (click)="genForm()">Create</button>
+    </div>
+</div>
+
+<div class="create-div">
+    <form *ngIf="goalForm" class="create" (ngSubmit)="createGoal()">
+        <div class="mb-3">
+            <label class="form-label">Goal: </label>
+            <input class="form-control" type="text" name="category" id="category" [(ngModel)]="newGoal.goals">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Price: </label>
+            <input class="form-control" type="text" name="category" id="category" [(ngModel)]="newGoal.price">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Savings Each Month: </label>
+            <input class="form-control" type="text" name="category" id="category" [(ngModel)]="newGoal.comment">
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+
+</div>

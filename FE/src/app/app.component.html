@@ -1,0 +1,36 @@
+
+
+
+<nav class="navbar navbar-expand-lg bg-dark">
+  <div class="container-fluid">
+   <h4 class="text-white">Budgetarian</h4> 
+    <!-- <img src="../assets/images/sample-logo.jpg" alt="nav-logo" width="35px"> -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link" aria-current="page" routerLink="home">Home</a>
+        <a *ngIf="!isLoggedIn" class="nav-link" routerLink="login">Login</a>
+        <a *ngIf="!isLoggedIn" class="nav-link"  routerLink="register">Register</a>
+        <a class="nav-link" *ngIf="isLoggedIn" [routerLink]="['create',currentid]">Profile</a>
+        <a class="nav-link" *ngIf="isLoggedIn" [routerLink]="['budget',currentid]">Budget</a>
+        <a class="nav-link" *ngIf="isLoggedIn" [routerLink]="['goals',currentid]">Goals</a>
+        <a *ngIf="isLoggedIn" class="nav-link text-white" (click)="logout()">Logout</a>
+        
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<footer class="bg-dark text-white">
+  <div class="footer-elements">
+    <p> Copyright ©2022</p>
+    <p>Version 0</p>
+  </div>
+
+</footer>
+
+<router-outlet></router-outlet>

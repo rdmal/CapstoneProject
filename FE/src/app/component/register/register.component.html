@@ -1,0 +1,71 @@
+<div class="reg-form">
+    <div class="card">
+        <div class="card-body">
+            <form *ngIf="!isSuccessful" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                <div class="row">
+                    <h1>Register:</h1>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label>Username:</label>
+                        <input type="text" class="form-control" name="uname" [(ngModel)]="form.username"
+                            #username="ngModel" required />
+                        <div *ngIf="username?.errors?.['required']&& username?.touched">
+                            Field Cannot be Empty
+                        </div>
+                    </div>
+                    <div class="col">
+                        <label>Password: </label>
+                        <input type="password" class="form-control" required="" name="pword" [(ngModel)]="form.password"
+                            #password="ngModel" />
+                        <div *ngIf="password?.errors?.['required']&& password?.touched">
+                            Field Cannot be Empty
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label>Email: </label>
+                        <input type="text" class="form-control" required="" name="email" [(ngModel)]="form.email"
+                            #email="ngModel" />
+                        <div *ngIf="email?.errors?.['required']&& email?.touched">
+                            Field Cannot be Empty
+                        </div>
+                    </div>
+                    <div class="col">
+                        <label>FirstName: </label>
+                        <input type="text" class="form-control" required name="fname" [(ngModel)]="form.firstname"
+                            #firstname="ngModel" />
+                        <div *ngIf="firstname?.errors?.['required']&& firstname?.touched">
+                            Field Cannot be Empty
+                        </div>
+                    </div>
+                    <div class="col">
+                        <label>Last Name: </label>
+                        <input type="text" class="form-control" required name="lname" [(ngModel)]="form.lastname"
+                            #lastname="ngModel" />
+                        <div *ngIf="lastname?.errors?.['required']&& lastname?.touched">
+                            Field Cannot be Empty
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="btn-class">
+                    <button type="submit" class="btn btn-primary">Register</button>
+                    <button id="reset" type="button" class="btn btn-secondary" (click)="refreshPage()">
+                        Reset
+                    </button>
+                </div>
+                <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+                    Registration Failed! <br>{{errorMessage}}
+                </div>
+                <p class="small fw-bold mt-2 pt-1 mb-0">Already Have an Account? <a routerLink="/login"
+                    class="link-danger">Login</a></p>
+            </form>
+            <div class="alert alert-success" *ngIf="isSuccessful">
+                Registration SucessFul!
+            </div>
+        </div>
+    </div>
+</div>
+

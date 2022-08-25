@@ -1,0 +1,31 @@
+<div class="update-form">
+    <div class="card">
+        <div class="card-body">
+            <h1>Update Selected Expense</h1>
+            <form (ngSubmit)="updateGoal()">
+                <div class="row">
+                    <div class="col">
+                        <label class="form-label">Category:</label>
+                        <input type="text" name="goal" [(ngModel)]="goal.goals" class="form-control">
+                    </div>
+                    <div class="col">
+                        <label class="form-label">Price:</label>
+                        <input type="text" name="price" class="form-control" [(ngModel)]="goal.price">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label class="form-label">Notes:</label>
+                        <input class="form-control" type="text" name="notes" [(ngModel)]="goal.comment">
+
+                    </div>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary">Update </button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</div>
