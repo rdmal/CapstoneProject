@@ -1,0 +1,66 @@
+<h1 class="display-5 fw-bolder text-center mb-2">Budget</h1>
+
+<div class="income-div" *ngIf="!genTable">
+
+    <div>
+        <label> Monthly Income: </label>
+        <input type="text" pattern="^[0-9]\d{0,9}(\.\d{1,3})?%?$" [(ngModel)]="monthlyincome" #income="ngModel">
+        <button (click)="genExpense()">Submit</button>
+        <div *ngIf="income?.errors?.['pattern']">Cannot Contain Letters</div>
+
+    </div>
+</div>
+
+<div class="budget-div" *ngIf="genTable">
+
+    <h2> Monthly Income: {{monthlyincome|currency}}</h2>
+    <div class="flex-table">
+        <table class="table table-bordered">
+            <thead>
+                <tr class="table-dark">
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Notes</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tr class="table-info table-dark text-black" *ngFor="let userExpense of expense">
+                <td>{{userExpense.category}}</td>
+                <td>{{userExpense.expensePrice|currency}}</td>
+                <td>{{userExpense.notes}}</td>
+                <td><button class="text-white" (click)="updateExpense(userExpense.id)">Edit</button></td>
+                <td><button class="text-white" (click)="deleteExpense(userExpense.id)">Delete</button></td>
+            </tr>
+            <div class="table-button">
+                <button class="btn btn-primary" *ngIf="!showTotal" (click)="getTotal()">Summary</button>
+                <button class="btn btn-primary" id="create" (click)="genCreate()">Create</button>
+            </div>
+            <div *ngIf="showTotal">
+                <p> Sum Of Total Expenses is: {{finaltotal|currency}}</p>
+                <p>Total Remaining: {{monthlyincome-finaltotal|currency}}</p>
+                <button class="btn btn-warning" (click)="refresh()">Reset</button>
+            </div>
+        </table>
+    </div>
+</div>
+
+
+<div class="create-div">
+    <form *ngIf="createForm" class="create" (ngSubmit)="createExpense()">
+        <div class="mb-3">
+            <label class="form-label">Category: </label>
+            <input class="form-control" type="text" name="category" id="category" [(ngModel)]="newExpense.category">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Price: </label>
+            <input class="form-control" type="text" name="category" id="category" [(ngModel)]="newExpense.expensePrice">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Notes: </label>
+            <input class="form-control" type="text" name="category" id="category" [(ngModel)]="newExpense.notes">
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+
+</div>
